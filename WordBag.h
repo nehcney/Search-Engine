@@ -1,3 +1,5 @@
+// WordBag is a wrapper class for WordBagImpl
+
 #ifndef WORDBAG_H
 #define WORDBAG_H
 
@@ -33,10 +35,10 @@ public:
 	}
 
 private:
-	WordBag(const WordBag &);				// prevent copying
+	WordBag(const WordBag &);		// prevent copying
 	WordBag &operator=(const WordBag &);	// prevent copying
 
-	WordBagImpl		*m_impl;
+	WordBagImpl *m_impl;
 };
 
 
