@@ -15,18 +15,18 @@ void IndexerImpl::submit(WordBag &wb)
 	numberToUrl.associate(urlNum, wb.getMyURL());
 
 	// Add matches to the wordToMatches map
-	MATCH temp_match;
-	temp_match.url = wb.getMyURL();
+	pair<int,int> temp;
+	temp.first = urlNum;
 	string word;
-	bool gotWord = wb.getFirstWord(word, temp_match.count);
+	bool gotWord = wb.getFirstWord(word, temp.second);
 	while (gotWord)
 	{
-		vector<MATCH> *temp_vector = wordToMatches.find(word);
+		vector<pair<int,int> > *temp_vector = wordToMatches.find(word);
 		if (temp_vector != nullptr) // word already exists
-			temp_vector->push_back(temp_match);
-		else // word is new, associate a new vector<MATCH>
-			wordToMatches.associate(word, vector<MATCH>(1, temp_match));
-		gotWord = wb.getNextWord(word, temp_match.count);
+			temp_vector->push_back(temp);
+		else // word is new, associate a new vector<pair>
+			wordToMatches.associate(word, vector<pair<int,int> >(1, temp));
+		gotWord = wb.getNextWord(word, temp.second);
 	}
 }
 
@@ -56,9 +56,20 @@ bool IndexerImpl::load(const string &filename)
 
 vector<MATCH> IndexerImpl::getMatches(const string &term)
 {
-	vector<MATCH> *temp = wordToMatches.find(term);
+	vector<pair<int,int> > *temp = wordToMatches.find(term);
 	if (temp != nullptr)
-		return *temp;
+	{
+		vector<MATCH> result;
+		for (auto i : *temp)
+		{
+			string *s = numberToUrl.find(i.first);
+			MATCH m;
+			m.url = *s;
+			m.count = i.second;
+			result.push_back(m);
+		}
+		return result;
+	}
 	else
 		return vector<MATCH>();
 }
