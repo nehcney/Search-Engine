@@ -1,3 +1,5 @@
+// IndexerImpl 
+
 #ifndef INDEXERIMPL_H
 #define INDEXERIMPL_H
 
@@ -25,10 +27,10 @@ public:
 private:
 	MyMap<std::string, int> urlToNumber;
 	MyMap<int, std::string> numberToUrl;
-	MyMap<std::string, std::vector<MATCH> > wordToMatches;
+	MyMap<std::string, std::vector<std::pair<int,int> > > wordToMatches;
 
 private:
-	IndexerImpl(const IndexerImpl& other);				// prevent copying
+	IndexerImpl(const IndexerImpl& other);			// prevent copying
 	IndexerImpl& operator=(const IndexerImpl& other);	// prevent copying
 };
 
@@ -37,18 +39,18 @@ private:
 // Non-member Functions
 //////////////////////////////////////////////////////
 
-inline bool saveToFile(std::ofstream &stream, std::vector<MATCH> &v)
+inline bool saveToFile(std::ofstream &stream, std::vector<std::pair<int,int> > &v)
 {
 	stream << v.size() << std::endl;
 	for (auto i : v)
-		stream << i.url << ',' << i.count << std::endl;
+		stream << i.first << ',' << i.second << std::endl;
 	return true;
 }
 
-inline bool loadFromFile(std::ifstream &stream, std::vector<MATCH> &v)
+inline bool loadFromFile(std::ifstream &stream, std::vector<std::pair<int,int> > &v)
 {
 	v.clear();
-	
+
 	std::string s;
 	if (!std::getline(stream, s))
 		return false;
@@ -56,11 +58,11 @@ inline bool loadFromFile(std::ifstream &stream, std::vector<MATCH> &v)
 
 	for (int i = 0; i < size; ++i)
 	{
-		MATCH temp;
+		std::pair<int,int> temp;
 		std::getline(stream, s);
 		int pos = s.find_first_of(',');
-		temp.url = s.substr(0, pos);
-		temp.count = atoi((s.substr(pos + 1)).c_str());
+		temp.first = atoi((s.substr(0, pos)).c_str());
+		temp.second = atoi((s.substr(pos + 1)).c_str());
 		v.push_back(temp);
 	}
 
