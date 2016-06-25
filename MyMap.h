@@ -1,3 +1,5 @@
+// MyMap is a templated BST map class.
+
 #ifndef MYMAP_H
 #define MYMAP_H
 
@@ -14,6 +16,7 @@ public:
 	void reset();
 	void associate(const mapFrom &from, const mapTo &toItem);
 	mapTo *find(const mapFrom &from);
+	// The spec specifies LEVEL-ORDER retrieval for getFirst & getNext
 	mapTo *getFirst(mapFrom &s);
 	mapTo *getNext(mapFrom &s);
 	int getNumItems() const;
@@ -36,7 +39,7 @@ private:
 	std::queue<Node*> m_queue;
 
 private:
-	MyMap(const MyMap& other);				// prevent copying
+	MyMap(const MyMap& other);		// prevent copying
 	MyMap& operator=(const MyMap& other);	// prevent copying
 	void deleteAllNodes(Node* root);
 };
@@ -173,14 +176,19 @@ mapTo *MyMap<typename mapFrom, typename mapTo>::find(const mapFrom &from)
 	return nullptr;
 }
 
+// Because getFirst() and getNext() must retrieve items in a
+// LEVEL-ORDER ordering, we need to employ the use of a queue.
 template <class mapFrom, class mapTo>
 mapTo *MyMap<typename mapFrom, typename mapTo>::getFirst(mapFrom &s)
 {
 	if (m_head == nullptr)
 		return nullptr;
+		
+	// Empty the queue
 	while (!m_queue.empty())
 		m_queue.pop();
 
+	// Add the children of the root node to the queue
 	if (m_head->left)
 		m_queue.push(m_head->left);
 	if (m_head->right)
