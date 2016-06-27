@@ -1,4 +1,7 @@
-// IndexerImpl 
+// The IndexerImpl class is used to load and save indexes, and
+// given a WordBag, is able to add new entries to those indexes.
+// Utilizes a mapping of ints to strings (and vice versa) using
+// a hashing function in order to reduce the size of the files.
 
 #ifndef INDEXERIMPL_H
 #define INDEXERIMPL_H
