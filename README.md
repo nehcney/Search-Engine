@@ -1,3 +1,3 @@
-A simple search engine that indexes the content of a series of web pages so the user can search those pages for keywords.
+A simple search engine that crawls and indexes a series of webpages using a reverse index data structure
 
 Copyright (c) 2016 Yen Chen
