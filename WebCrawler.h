@@ -1,3 +1,5 @@
+// Wrapper class for WebCrawlerImpl
+
 #ifndef WEBCRAWLER_H
 #define WEBCRAWLER_H
 
