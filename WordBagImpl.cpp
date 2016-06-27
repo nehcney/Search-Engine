@@ -50,25 +50,3 @@ void WordBagImpl::insertWordsIntoMap(const string& stringOfWords)
 	for (auto i : results)
 		insertOrUpdateMap(i);
 }
-
-
-/////////////// TEST
-/*
-#include <iostream>
-
-int main()
-{
-	string s = "- This, is!@ a test\n"
-		"this, is...another! line?\n"
-		"test\n";
-	WordBagImpl test("www.abc.com", s);
-	string word;
-	int count;
-	bool gotWord = test.getFirstWord(word, count);
-	while (gotWord == true)
-	{
-		cout << "The word " << word << " occurs " << count << " times in " << test.getMyURL() << endl;
-		gotWord = test.getNextWord(word, count);
-	}
-}
-*/
