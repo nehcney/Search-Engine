@@ -1,3 +1,5 @@
+// Wrapper class for SearcherImpl
+
 #ifndef SEARCHER_H
 #define SEARCHER_H
 
