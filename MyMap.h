@@ -283,31 +283,4 @@ void MyMap<typename mapFrom, typename mapTo>::deleteAllNodes(Node* root)
 	delete root;
 }
 
-
-//////// TEST
-/*
-int main()
-{
-MyMap<int, int> test;
-test.load("test.txt");
-
-int a, *b;
-b = test.getFirst(a);
-test.associate(3, 30);
-test.associate(1, 10);
-test.associate(4, 40);
-test.associate(2, 20);
-b = test.getFirst(a);
-b = test.getNext(a);
-b = test.getNext(a);
-b = test.getNext(a);
-b = test.getNext(a);
-b = test.find(4);
-test.save("test.txt");
-
-MyMap<string, int> test2;
-test2.associate("abc", 1);
-}
-*/
-
 #endif // MYMAP_H
