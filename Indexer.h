@@ -1,3 +1,5 @@
+// Wrapper class for IndexerImpl
+
 #ifndef INDEXER_H
 #define INDEXER_H
 
