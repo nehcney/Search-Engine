@@ -1,3 +1,10 @@
+// The WebCrawlerImpl class is used to download webpages from the internet
+// and add their content to an index (through the Indexer class). New URLs
+// are submitted through the submitURL method, stored in a vector (m_urls),
+// and then when the crawl method is called the URL contents are downloaded
+// and indexed into the Indexer object (m_indexer), which can then be saved
+// to disk and later loaded.
+
 #ifndef WEBCRAWLERIMPL_H
 #define WEBCRAWLERIMPL_H
 
@@ -22,7 +29,7 @@ private:
 
 private:
 	WebCrawlerImpl(const WebCrawlerImpl& other);			// prevent copying
-	WebCrawlerImpl& operator=(const WebCrawlerImpl& other);	// prevent copying
+	WebCrawlerImpl& operator=(const WebCrawlerImpl& other);		// prevent copying
 };
 
 #endif // WEBCRAWLERIMPL_H
